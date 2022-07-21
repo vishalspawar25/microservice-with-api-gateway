@@ -1,0 +1,44 @@
+﻿{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/product",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/product",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7104
+        }
+      ],
+      "QoSOptions": {
+        "TimeoutValue": 360000
+      },
+      "Key": "Product"
+    },
+    {
+      "DownstreamPathTemplate": "/payment",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/payment",
+      "UpstreamHttpMethod": [ "Get" ],
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7039
+        }
+      ],
+      "QoSOptions": {
+        "TimeoutValue": 360000
+      },
+      "Key": "Payment"
+    }
+  ],
+  "Aggregates": [
+    {
+      "RouteKeys": [ "Payment", "Product" ],
+      "UpstreamPathTemplate": "/agg",
+      "Aggregator": "ProductWithProjectAggregator"
+    }
+  ]
+}
+
